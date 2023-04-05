@@ -1,0 +1,26 @@
+NAME	=	demo
+SRCS	=	main.cpp \
+
+OBJS	=$(SRCS:.cpp=.o)
+FLAGS	= -Wextra -Wall -Werror -std=c++98
+CC		= c++
+INCS	=.
+
+.cpp.o :
+		@${CC} ${FLAGS} -c $< -o ${<:.cpp=.o} -I${INCS}
+
+all		: $(NAME)
+
+${NAME}	: ${OBJS}
+		clear
+		@${CC} ${FLAGS} ${OBJS} -o ${NAME}
+
+clean:
+	@echo delete : ${OBJS}
+	@rm -rf $(OBJS)
+
+fclean: clean
+	@echo delete : ${NAME}
+	@rm -rf $(NAME)
+
+re: fclean all
